@@ -1,0 +1,16 @@
+      /* 提示框 */
+      .my_alert {
+        position: relative;
+        width: 50%;
+        height: 52px;
+        top: -40%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .my_alert .alert {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: none;
+      }
