@@ -16,7 +16,7 @@ app.get("/login", function (req, res) {
   db.login(req.query.phone, req.query.password, function (data) {
     console.log(data, "data");
     if (data.length > 0) {
-      res.json({ status: 1, msg: "登录成功" });
+      res.json({ status: 1, msg: "登录成功", data: data });
     } else {
       res.json({ status: 0, msg: "用户名或密码错误" });
     }

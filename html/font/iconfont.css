@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4433911 */
-  src: url('iconfont.woff2?t=1707270179230') format('woff2'),
-       url('iconfont.woff?t=1707270179230') format('woff'),
-       url('iconfont.ttf?t=1707270179230') format('truetype');
+  src: url('iconfont.woff2?t=1707406294510') format('woff2'),
+       url('iconfont.woff?t=1707406294510') format('woff'),
+       url('iconfont.ttf?t=1707406294510') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,50 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shoucangxuanzhong:before {
+  content: "\e602";
+}
+
+.icon-wenbenbianjitianchong:before {
+  content: "\e6d4";
+}
+
+.icon-ai-out:before {
+  content: "\e642";
+}
+
+.icon-labelb:before {
+  content: "\e61a";
+}
+
+.icon-touxiang:before {
+  content: "\e679";
+}
+
+.icon-biaoge:before {
+  content: "\e63e";
+}
+
+.icon-shuju:before {
+  content: "\e6da";
+}
+
+.icon-shoucang_weixuanzhong:before {
+  content: "\e668";
+}
+
+.icon-fsux_tubiao_jindutiaotu:before {
+  content: "\e603";
+}
+
+.icon-mianbaoxie:before {
+  content: "\e609";
+}
+
+.icon-fuwenbenbianjiqi_zitiyanse:before {
+  content: "\e655";
 }
 
 .icon-yanzhengma1:before {
