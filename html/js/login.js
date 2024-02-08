@@ -24,9 +24,6 @@ function login() {
       success: (res) => {
         // 登录成功，进行跳转
         if (res.status == 1) {
-          console.log(res);
-          // 本地存储用户信息
-          localStorage.setItem("loginUser", JSON.stringify(res.data[0]));
           // 提示信息
           showAlert(0, res.msg);
           setTimeout(() => {

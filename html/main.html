@@ -10,89 +10,11 @@
     />
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="./css/main.css" />
-    <link rel="stylesheet" href="./font/iconfont.css" />
-    <link rel="stylesheet" href="./css/my_alert.css" />
   </head>
   <body>
-    <div class="divAll">
-      <!-- 框架 -->
-      <div class="divTop">
-        <h2>后台管理系统</h2>
-        <div class="desc">
-          <div class="iconfont icon-touxiang person"></div>
-          <a href="javascript:exit()" class="iconfont icon-ai-out exit"
-            >&nbsp; 安全退出</a
-          >
-        </div>
-      </div>
-      <div class="divMiddle">
-        <div class="divLeft">left</div>
-        <div class="divRight">right</div>
-      </div>
-      <!-- 警告框 -->
-      <div class="my_alert">
-        <div class="alert alert-success alert-dismissible" role="alert">
-          <button
-            type="button"
-            class="close"
-            data-dismiss="alert"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <div class="msgText">xxxx</div>
-        </div>
-        <div class="alert alert-danger alert-dismissible" role="alert">
-          <button
-            type="button"
-            class="close"
-            data-dismiss="alert"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <div class="msgText">xxxx</div>
-        </div>
-        <div class="alert alert-warning alert-dismissible" role="alert">
-          <button
-            type="button"
-            class="close"
-            data-dismiss="alert"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <div class="msgText">xxxx</div>
-        </div>
-        <div class="alert alert-info alert-dismissible" role="alert">
-          <button
-            type="button"
-            class="close"
-            data-dismiss="alert"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <div class="msgText">xxxx</div>
-        </div>
-      </div>
+    <div class="container">
+      <!-- Content here -->
+      xxx
     </div>
   </body>
-  <script src="./js/my_alert.js"></script>
-  <script>
-    // 窗口加载事件
-    window.onload = function () {
-      $(" .desc .person").html(
-        "&nbsp;&nbsp;" + JSON.parse(localStorage.getItem("loginUser")).realName
-      );
-    };
-    function exit() {
-      localStorage.removeItem("loginUser");
-      showAlert("0", "退出成功");
-      setTimeout(() => {
-        location.href = "./login.html";
-      }, 500);
-    }
-  </script>
 </html>

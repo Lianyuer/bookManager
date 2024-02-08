@@ -1,9 +1,9 @@
       /* 提示框 */
       .my_alert {
-        position: fixed;
+        position: relative;
         width: 50%;
         height: 52px;
-        top: 100px;
+        top: -40%;
         left: 50%;
         transform: translateX(-50%);
       }
