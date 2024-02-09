@@ -21,13 +21,19 @@
         <h2>后台管理系统</h2>
         <div class="desc">
           <div class="iconfont icon-touxiang person"></div>
-          <a href="javascript:exit()" class="iconfont icon-ai-out exit"
+          <a
+            href="#"
+            class="iconfont icon-ai-out exit"
+            data-toggle="modal"
+            data-target="#exampleModal"
             >&nbsp; 安全退出</a
           >
         </div>
       </div>
       <div class="divMiddle">
-        <div class="divLeft">left</div>
+        <div class="divLeft">
+          <div id="ulShow"></div>
+        </div>
         <div class="divRight">right</div>
       </div>
       <!-- 警告框 -->
@@ -77,22 +83,74 @@
           <div class="msgText">xxxx</div>
         </div>
       </div>
+      <!-- 模态框 -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">温馨提示</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">确认要退出吗？</div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                关闭
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="exit()"
+                data-dismiss="modal"
+              >
+                确认退出
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
   <script src="./js/my_alert.js"></script>
+  <script src="./js/main.js"></script>
   <script>
-    // 窗口加载事件
+    let user;
+    // 窗体加载事件，获取用户信息
     window.onload = function () {
-      $(" .desc .person").html(
-        "&nbsp;&nbsp;" + JSON.parse(localStorage.getItem("userInfo")).realName
-      );
+      if (localStorage.getItem("userInfo")) {
+        user = JSON.parse(localStorage.getItem("userInfo")).realName;
+        $(" .desc .person").html("&nbsp;&nbsp;" + user);
+        // 生成树形结构菜单
+        showMenu();
+      } else {
+        showAlert(1, "请先登录");
+        setTimeout(() => {
+          location.href = "./login.html";
+        }, 800);
+      }
     };
     function exit() {
       localStorage.removeItem("loginUser");
       showAlert("0", "退出成功");
       setTimeout(() => {
         location.href = "./login.html";
-      }, 500);
+      }, 1000);
     }
   </script>
 </html>
