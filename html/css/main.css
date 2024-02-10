@@ -69,77 +69,60 @@ body {
 }
 
 /* 树状菜单 */
-.divMiddle .divLeft #ulShow li {
-  list-style: none;
-  position: relative;
+#ulShow {
+  height: 100%;
 }
 
-.divMiddle .divLeft #ulShow li a:hover {
-  background-color: #2D363F;
-}
-
-.divMiddle .divLeft #ulShow li a {
-  display: block;
-  width: 100%;
+#ulShow>.list-group {
+  color: #fff;
+  margin: 0;
   height: 40px;
   line-height: 40px;
-  font-size: 16px;
-  color: #fff;
-  text-decoration: none;
+  margin: 0;
+  list-style: none;
+}
+
+#ulShow>.list-group>.list-group {
+  margin: 0;
   padding-left: 20px;
 }
 
-.divMiddle .divLeft #ulShow li ol {
-  padding: 0;
+#ulShow>.list-group>.collapse>.list-group {
   margin: 0;
+}
+
+/* 动画进行时的样式设置，要和动画结束时的样式保持一致 */
+#ulShow>.list-group>.collapse>.list-group>.list-group-item,
+#ulShow>.list-group .collapsing .list-group-item {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  padding-left: 40px;
   background-color: #1E2D3B;
+  border: 0;
 }
 
-.divMiddle .divLeft #ulShow li .shouqi {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+#ulShow>.list-group>.collapse>.list-group>.list-group-item a,
+#ulShow>.list-group .collapsing .list-group-item a {
+  text-decoration: none;
+  color: #fff;
 }
 
-.divMiddle .divLeft #ulShow li ol a {
-  padding-left: 60px;
+#ulShow>.list-group>.collapse>.list-group>.list-group-item:hover,
+#ulShow>.list-group .collapsing .list-group-item:hover {
+  background: #2D363F;
+  cursor: pointer;
 }
 
-.divMiddle .divLeft #ulShow li ol a:hover {
+#ulShow>.list-group>.collapse>.list-group>.list-group-item:hover a,
+#ulShow>.list-group .collapsing .list-group-item:hover a {
   color: lightblue;
 }
 
-/* .list-group {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+#ulShow>.list-group .collapsing {
+  transition: height 0.5s ease;
+  /* 修改为你想要的持续时间和缓动函数 */
 }
-
-.list-group-item {
-  background-color: transparent;
-  border: 0;
-  height: 50px;
-  display: flex;
-  align-items: center;
-}
-
-.list-group-item:hover {
-  background-color: #2D363F;
-}
-
-.list-group-item a {
-  color: #fff;
-  text-decoration: none;
-}
-
-.list-group>.list-group {
-  background-color: #1E2D3B;
-  list-style: none;
-}
-
-.list-group>.list-group>.list-group-item {
-  padding-left: 40px;
-} */
 
 /* 右侧 */
 .divMiddle .divRight {
