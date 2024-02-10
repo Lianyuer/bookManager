@@ -24,12 +24,6 @@ function showMenu() {
         content += `</ol></li>`;
       });
       $("#ulShow").append(content);
-      // $(".shouqi").removeClass("icon-shuzhuang icon-shuzhuang1 ");
-      // if ($("divMiddle .divLeft #ulShow li ol").hasClass("collapse in")) {
-      //   $(".shouqi").addClass("icon-shuzhuang");
-      // } else if ($("divMiddle .divLeft #ulShow li ol").hasClass("collapse")) {
-      //   $(".shouqi").addClass("icon-shuzhuang1");
-      // }
     },
   });
 }

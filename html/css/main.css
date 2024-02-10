@@ -109,6 +109,37 @@ body {
   color: lightblue;
 }
 
+/* .list-group {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list-group-item {
+  background-color: transparent;
+  border: 0;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.list-group-item:hover {
+  background-color: #2D363F;
+}
+
+.list-group-item a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.list-group>.list-group {
+  background-color: #1E2D3B;
+  list-style: none;
+}
+
+.list-group>.list-group>.list-group-item {
+  padding-left: 40px;
+} */
 
 /* 右侧 */
 .divMiddle .divRight {
