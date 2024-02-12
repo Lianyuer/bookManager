@@ -42,7 +42,7 @@ function showMenu() {
             // 构建子菜单项的列表组，并将其包装在一个 collapse 元素中
             subItemsHtml =
               `<div class="collapse" id="${collapseId}">` +
-              `<ul class="list-group list-group-flush">` +
+              `<ul class="list-group list-group-flush subItemGroup">` +
               topItem.subItems
                 .map(
                   (subItem) =>
