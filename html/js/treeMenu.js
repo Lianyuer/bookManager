@@ -1,7 +1,7 @@
 function showMenu() {
   // 发起 AJAX 请求，从服务器获取所有菜单项数据
   $.ajax({
-    url: "http://localhost:3000/pages/selectAll",
+    url: "http://localhost:3000/pages/pages_selectAll",
     success: (res) => {
       console.log(res, "res");
       // 创建一个映射对象，用于存储菜单项及其子菜单项，map是计算结束后返回的值，是下一次调用回调时的第一个参数；item是当前值
@@ -46,8 +46,8 @@ function showMenu() {
               topItem.subItems
                 .map(
                   (subItem) =>
-                    // 将子菜单项转换为 a 标签，并设置 href 属性
-                    `<li class="list-group-item subItem" onclick="handleSubItem('${subItem.pageName}')"><a href="#">${subItem.pageName}</a></li>`
+                    // 将子菜单项转换为 a 标签，设置a标签的 target 值为 main.html中的 iframe标签的name值，并设置 href 属性
+                    `<li class="list-group-item subItem" onclick="handleSubItem('${subItem.pageName}')"><a target="iframe1" href='${subItem.pageUrl}'>${subItem.pageName}</a></li>`
                 )
                 .join("") +
               `</ul>` +
@@ -82,8 +82,5 @@ function showMenu() {
 
 function handleSubItem(pageName) {
   console.log(pageName, "pageName");
+  // $(".divRight").html(pageName);
 }
-
-$(".subItem").on("click", function (pageName) {
-  handleSubItem(pageName);
-});

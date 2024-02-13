@@ -3,45 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>图书管理系统-首页</title>
+    <title>Document</title>
     <link
       rel="stylesheet"
       href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
     />
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./font/iconfont.css" />
     <link rel="stylesheet" href="./css/my_alert.css" />
+    <link rel="stylesheet" href="./css/userTypeManage.css" />
   </head>
   <body>
-    <div class="divAll">
-      <!-- 框架 -->
-      <div class="divTop">
-        <h2>后台管理系统</h2>
-        <div class="desc">
-          <div class="iconfont icon-touxiang person"></div>
-          <a
-            href="#"
-            class="iconfont icon-ai-out exit"
-            data-toggle="modal"
-            data-target="#exampleModal"
-            >&nbsp; 安全退出</a
-          >
-        </div>
-      </div>
-      <div class="divMiddle">
-        <div class="divLeft">
-          <div id="ulShow"></div>
-        </div>
-        <div class="divRight">
-          <iframe
-            name="iframe1"
-            width="100%"
-            height="99%"
-            frameborder="0"
-          ></iframe>
-        </div>
+    <div class="divUserType">
+      <!-- 内容展示部分 -->
+      <div class="divContent">
+        <!-- 面包屑导航 -->
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">用户管理</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+              用户类型管理
+            </li>
+          </ol>
+        </nav>
+        <!-- 表格 -->
+        <table class="table">
+          <thead>
+            <th>序号</th>
+            <th>类型名称</th>
+            <th>备注</th>
+            <th>操作</th>
+          </thead>
+          <tbody class="tShow"></tbody>
+        </table>
       </div>
       <!-- 警告框 -->
       <div class="my_alert">
@@ -135,29 +130,22 @@
     </div>
   </body>
   <script src="./js/my_alert.js"></script>
-  <script src="./js/treeMenu.js"></script>
+
   <script>
-    let user;
-    // 窗体加载事件，获取用户信息
-    window.onload = function () {
-      if (localStorage.getItem("userInfo")) {
-        user = JSON.parse(localStorage.getItem("userInfo")).realName;
-        $(" .desc .person").html("&nbsp;&nbsp;" + user);
-        // 生成树形结构菜单
-        showMenu();
-      } else {
-        showAlert(1, "请先登录");
-        setTimeout(() => {
-          location.href = "./login.html";
-        }, 800);
-      }
-    };
-    function exit() {
-      localStorage.removeItem("loginUser");
-      showAlert("0", "退出成功");
-      setTimeout(() => {
-        location.href = "./login.html";
-      }, 1000);
+    function bindData() {
+      $.ajax({
+        url: "http://localhost:3000/userType/userType_selectType",
+        success: (res) => {
+          console.log(res);
+          res.forEach((element) => {
+            let tr = `<tr><td>${element.id}</td><td>${element.typeName}</td><td>${element.remark}</td><td><button type="button" class="btn btn-primary">编辑</button><button type="button" class="btn btn-danger">删除</button><button type="button" class="btn btn-success">权限分配</button></td></tr>`;
+            $(".tShow").append(tr);
+          });
+        },
+      });
     }
+    window.onload = function () {
+      bindData();
+    };
   </script>
 </html>

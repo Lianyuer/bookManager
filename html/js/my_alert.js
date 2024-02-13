@@ -13,6 +13,7 @@ function showAlert(index, msg) {
   //   $(".my_alert .alert").eq(i).fadeOut();
   // });
 
+  $(".my_alert").css("display", "block");
   $(".my_alert .alert").eq(index).fadeIn();
   $(".msgText").eq(index).html(msg);
 

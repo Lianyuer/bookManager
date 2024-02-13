@@ -33,8 +33,14 @@ module.exports.login = function (username, pwd, callback) {
   // });
 };
 
-// ******************************pages-页面路径***********************************
-module.exports.selectAll = function (callback) {
+// ******************************pages-页面信息表***********************************
+module.exports.pages_selectAll = function (callback) {
   let sql = `select * from pages`;
+  execSql(sql, callback);
+};
+
+// ******************************userType-用户类型信息***********************************
+module.exports.userType_selectType = function (callback) {
+  let sql = `select * from usertype`;
   execSql(sql, callback);
 };

@@ -23,13 +23,19 @@ app.get("/login", function (req, res) {
   });
 });
 
-// 页面路径接口
-app.get("/pages/selectAll", function (req, res) {
-  db.selectAll(function (data) {
+// ******************************pages-页面信息表***********************************
+app.get("/pages/pages_selectAll", function (req, res) {
+  db.pages_selectAll(function (data) {
     res.json(data);
   });
 });
 
+// ******************************userType-用户类型信息***********************************
+app.get("/userType/userType_selectType", function (req, res) {
+  db.userType_selectType(function (data) {
+    res.json(data);
+  });
+});
 // 端口
 app.listen(3000, function () {
   console.log("服务器已启动，监听端口3000");

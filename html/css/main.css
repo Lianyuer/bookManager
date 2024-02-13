@@ -121,7 +121,7 @@ body {
 }
 
 #ulShow>.list-group .collapsing {
-  transition: height 0.5s ease;
+  transition: height .5s ease;
   /* 修改为你想要的持续时间和缓动函数 */
   /* 动画加载时会有一个向下的高度占位 */
   /* background-color: red; */

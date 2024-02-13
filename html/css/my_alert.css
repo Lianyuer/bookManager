@@ -1,5 +1,6 @@
       /* 提示框 */
       .my_alert {
+        display: none;
         position: fixed;
         width: 50%;
         height: 52px;
