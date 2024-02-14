@@ -76,7 +76,6 @@ body {
 #ulShow>.list-group {
   color: #fff;
   margin: 0;
-  height: 40px;
   line-height: 40px;
   margin: 0;
   list-style: none;
@@ -84,6 +83,7 @@ body {
 
 /* 一级菜单 */
 #ulShow>.list-group>.list-group {
+  height: 40px;
   margin: 0;
   padding-left: 20px;
 }
@@ -92,9 +92,8 @@ body {
   margin: 0;
 }
 
-/* 动画进行时的样式设置，要和动画结束时的样式保持一致 */
 #ulShow>.list-group>.collapse>.list-group>.list-group-item,
-#ulShow>.list-group .collapsing .list-group-item {
+#ulShow>.list-group>.collapsing>.list-group>.list-group-item {
   display: flex;
   align-items: center;
   padding: 0;
@@ -104,27 +103,16 @@ body {
 }
 
 #ulShow>.list-group>.collapse>.list-group>.list-group-item a,
-#ulShow>.list-group .collapsing .list-group-item a {
+#ulShow>.list-group>.collapsing>.list-group>.list-group-item a {
   text-decoration: none;
   color: #fff;
 }
-
-/* #ulShow>.list-group>.collapse>.list-group>.list-group-item:hover,
-#ulShow>.list-group .collapsing .list-group-item:hover {
-  background: #2D363F;
-  cursor: pointer;
-} */
 
 #ulShow>.list-group>.collapse>.list-group>.list-group-item a:hover {
   color: lightblue;
 }
 
-#ulShow>.list-group .collapsing {
-  transition: height .5s ease;
-  /* 修改为你想要的持续时间和缓动函数 */
-  /* 动画加载时会有一个向下的高度占位 */
-  /* background-color: red; */
-}
+
 
 /* 右侧 */
 .divMiddle .divRight {

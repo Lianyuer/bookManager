@@ -40,7 +40,7 @@ function showMenu() {
             const collapseId = `collapse-${topItem.id}`;
             // 构建子菜单项的列表组，并将其包装在一个 collapse 元素中
             subItemsHtml =
-              `<div class="collapse" id="${collapseId}">` +
+              `<div class="collapse collapseBox" id="${collapseId}">` +
               `<ul class="list-group list-group-flush subItemGroup">` +
               topItem.subItems
                 .map(
@@ -53,7 +53,7 @@ function showMenu() {
               `</div>`;
 
             // 创建折叠触发器的按钮，并设置 data-target 属性以指向相应的 collapse 元素
-            const triggerButton = `<div class="list-group"  data-toggle="collapse" data-target="#${collapseId}" aria-expanded="false" aria-controls="${collapseId}">${topItem.pageName}</div>`;
+            const triggerButton = `<div class="list-group topItem"  data-toggle="collapse" data-target="#${collapseId}" aria-expanded="false" aria-controls="${collapseId}">${topItem.pageName}</div>`;
 
             // 返回顶级菜单项的 HTML 内容，包括折叠触发器和子菜单项
             return triggerButton + subItemsHtml;
@@ -69,6 +69,11 @@ function showMenu() {
         .empty()
         .append(`<ul class="list-group">${listGroupContent}</ul>`);
 
+      console.log(
+        document.querySelector(".collapseBox").style.display,
+        "display"
+      );
+
       // 初始化所有 collapse 元素以启用折叠功能
       $(".collapse").collapse();
     },
@@ -77,10 +82,10 @@ function showMenu() {
       console.error("An error occurred:", error);
     },
   });
-}
 
-function handleSubItem(pageName) {
-  console.log(pageName, "pageName");
+  function handleSubItem(pageName) {
+    console.log(pageName, "pageName");
 
-  // $(".divRight").html(pageName);
+    // $(".divRight").html(pageName);
+  }
 }
