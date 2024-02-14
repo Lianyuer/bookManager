@@ -38,7 +38,6 @@ function showMenu() {
           if (topItem.subItems.length > 0) {
             // 为子菜单项创建一个唯一的 collapse ID
             const collapseId = `collapse-${topItem.id}`;
-
             // 构建子菜单项的列表组，并将其包装在一个 collapse 元素中
             subItemsHtml =
               `<div class="collapse" id="${collapseId}">` +
@@ -82,5 +81,6 @@ function showMenu() {
 
 function handleSubItem(pageName) {
   console.log(pageName, "pageName");
+
   // $(".divRight").html(pageName);
 }

@@ -28,6 +28,7 @@ html {
       text-align: center;
       color: #fff;
       margin-bottom: 30px;
+      white-space: nowrap;
     }
 
     .login-body {
@@ -52,7 +53,7 @@ html {
 
         .person {
           position: absolute;
-          top: 31px;
+          top: 34px;
           z-index: 999;
           font-size: 20px;
           margin-left: 3px;
@@ -64,7 +65,7 @@ html {
 
         .mima {
           position: absolute;
-          top: 32px;
+          top: 36px;
           left: 2px;
           z-index: 999;
           margin-left: 3px;
@@ -75,9 +76,11 @@ html {
       }
 
       .codes {
+        position: relative;
+
         .yanzhengma {
           position: absolute;
-          top: 34px;
+          top: 38px;
           left: 2px;
           z-index: 999;
           margin-left: 3px;
@@ -92,6 +95,7 @@ html {
 
         .txt {
           margin-bottom: 5px;
+          padding: 0;
         }
 
         input {

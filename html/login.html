@@ -15,12 +15,14 @@
     <link rel="stylesheet" media="screen" href="css/particle_css/style.css" />
     <link rel="stylesheet" href="./css/login.css" />
     <link rel="stylesheet" href="./css/my_alert.css" />
+
     <link
+      href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.2/css/bootstrap.min.css"
       rel="stylesheet"
-      href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
     />
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- jQuery and JavaScript Bundle with Popper -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
 
     <!-- 引入字体 -->
     <link rel="stylesheet" href="./font/iconfont.css" />
@@ -49,19 +51,21 @@
               <input type="text" class="form-control" id="tPwd" />
             </div>
             <div class="input-group codes">
-              <div class="txt">验证码</div>
-              <div class="group">
-                <span class="iconfont icon-yanzhengma1 yanzhengma"></span>
-                <input type="text" class="form-control" id="tCodes" />
-                <span
-                  class="codeText"
-                  onclick="javascript:$('.codeText').html(showCode())"
-                ></span
-                ><a
-                  href="javascript:$('.codeText').html(showCode())"
-                  class="changeBtn"
-                  >换一换</a
-                >
+              <div class="txt col-2">验证码</div>
+              <span class="iconfont icon-yanzhengma1 yanzhengma"></span>
+              <div class="group col-12 row">
+                <input type="text" class="form-control col-6" id="tCodes" />
+                <div class="col-6">
+                  <span
+                    class="codeText"
+                    onclick="javascript:$('.codeText').html(showCode())"
+                  ></span
+                  ><a
+                    href="javascript:$('.codeText').html(showCode())"
+                    class="changeBtn"
+                    >换一换</a
+                  >
+                </div>
               </div>
             </div>
           </div>

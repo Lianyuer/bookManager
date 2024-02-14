@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link
+      href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.2/css/bootstrap.min.css"
       rel="stylesheet"
-      href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
     />
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- jQuery and JavaScript Bundle with Popper -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="./font/iconfont.css" />
     <link rel="stylesheet" href="./css/my_alert.css" />
     <link rel="stylesheet" href="./css/userTypeManage.css" />
@@ -37,6 +38,17 @@
           </thead>
           <tbody class="tShow"></tbody>
         </table>
+      </div>
+      <!-- 加载 -->
+      <div class="d-flex justify-content-center">
+        <div
+          class="spinner-border"
+          currentColor="#000"
+          role="status"
+          style="display: none"
+        >
+          <span class="sr-only">Loading...</span>
+        </div>
       </div>
       <!-- 警告框 -->
       <div class="my_alert">
@@ -88,15 +100,15 @@
       <!-- 模态框 -->
       <div
         class="modal fade"
-        id="exampleModal"
+        id="myModal"
         tabindex="-1"
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby="myModalLabel"
         aria-hidden="true"
       >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">温馨提示</h5>
+              <h5 class="modal-title" id="myModalLabel"></h5>
               <button
                 type="button"
                 class="close"
@@ -106,23 +118,18 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">确认要退出吗？</div>
+            <div class="modal-body"></div>
             <div class="modal-footer">
               <button
                 type="button"
-                class="btn btn-secondary"
+                class="btn btn-secondary cancel"
                 data-dismiss="modal"
-              >
-                关闭
-              </button>
+              ></button>
               <button
                 type="button"
-                class="btn btn-primary"
-                onclick="exit()"
+                class="btn btn-primary confirm"
                 data-dismiss="modal"
-              >
-                确认退出
-              </button>
+              ></button>
             </div>
           </div>
         </div>
@@ -130,7 +137,7 @@
     </div>
   </body>
   <script src="./js/my_alert.js"></script>
-
+  <script src="./js/userTypeManage.js"></script>
   <script>
     function bindData() {
       $.ajax({
@@ -138,7 +145,15 @@
         success: (res) => {
           console.log(res);
           res.forEach((element) => {
-            let tr = `<tr><td>${element.id}</td><td>${element.typeName}</td><td>${element.remark}</td><td><button type="button" class="btn btn-primary">编辑</button><button type="button" class="btn btn-danger">删除</button><button type="button" class="btn btn-success">权限分配</button></td></tr>`;
+            let tr = `<tr>
+                        <td>${element.id}</td>
+                        <td>${element.typeName}</td>
+                        <td>${element.remark}</td>
+                        <td><button type="button" class="btn btn-primary">编辑</button>
+                            <button type="button" class="btn btn-danger" onclick="del(${element.id})">删除</button>
+                            <button type="button" class="btn btn-success">权限分配</button>
+                        </td>
+                      </tr>`;
             $(".tShow").append(tr);
           });
         },

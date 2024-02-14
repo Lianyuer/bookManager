@@ -36,6 +36,17 @@ app.get("/userType/userType_selectType", function (req, res) {
     res.json(data);
   });
 });
+
+// ******************************用户类型-删除操作***********************************
+app.get("/userType/deleteById", function (req, res) {
+  db.deleteById(req.query.id, function (data) {
+    if (data.affectedRows > 0) {
+      res.json({ status: 1, msg: "删除成功", data: data });
+    } else {
+      res.json({ status: 0, msg: "删除失败", data: data });
+    }
+  });
+});
 // 端口
 app.listen(3000, function () {
   console.log("服务器已启动，监听端口3000");

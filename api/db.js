@@ -39,8 +39,14 @@ module.exports.pages_selectAll = function (callback) {
   execSql(sql, callback);
 };
 
-// ******************************userType-用户类型信息***********************************
+// ******************************userType-用户类型信息******************************
 module.exports.userType_selectType = function (callback) {
   let sql = `select * from usertype`;
+  execSql(sql, callback);
+};
+
+// ******************************用户类型-删除操作***********************************
+module.exports.deleteById = function (id, callback) {
+  let sql = `delete from usertype where id = ${id}`;
   execSql(sql, callback);
 };

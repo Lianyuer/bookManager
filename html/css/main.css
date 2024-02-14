@@ -109,14 +109,13 @@ body {
   color: #fff;
 }
 
-#ulShow>.list-group>.collapse>.list-group>.list-group-item:hover,
+/* #ulShow>.list-group>.collapse>.list-group>.list-group-item:hover,
 #ulShow>.list-group .collapsing .list-group-item:hover {
   background: #2D363F;
   cursor: pointer;
-}
+} */
 
-#ulShow>.list-group>.collapse>.list-group>.list-group-item:hover a,
-#ulShow>.list-group .collapsing .list-group-item:hover a {
+#ulShow>.list-group>.collapse>.list-group>.list-group-item a:hover {
   color: lightblue;
 }
 
