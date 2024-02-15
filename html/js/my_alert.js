@@ -19,5 +19,6 @@ function showAlert(index, msg) {
 
   setTimeout(() => {
     $(".my_alert .alert").eq(index).fadeOut();
+    $(".my_alert").css("display", "none");
   }, 800);
 }

@@ -45,8 +45,26 @@ module.exports.userType_selectType = function (callback) {
   execSql(sql, callback);
 };
 
-// ******************************用户类型-删除操作***********************************
-module.exports.deleteById = function (id, callback) {
+// 用户类型-根据 id 删除用户类型
+module.exports.userType_deleteById = function (id, callback) {
   let sql = `delete from usertype where id = ${id}`;
+  execSql(sql, callback);
+};
+
+// 用户类型-根据id查询用户类型数据
+module.exports.usertype_selectById = function (id, callback) {
+  let sql = `select * from usertype where id = ` + id;
+  execSql(sql, callback);
+};
+
+// 用户类型-新增和编辑数据
+module.exports.userType_addAndEdit = function (id, userType, callback) {
+  if (id == -1) {
+    var sql = `insert into usertype values (null,"${userType.typeName}","${userType.remark}")`;
+  } else {
+    // id 不等于 -1 说明是编辑
+    sql = `update usertype set id = null, typeName = "${userType.typeName}",remark = "${userType.remark}" where id = ${id}`;
+  }
+  console.log(sql, "sql");
   execSql(sql, callback);
 };

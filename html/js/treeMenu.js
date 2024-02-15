@@ -82,10 +82,9 @@ function showMenu() {
       console.error("An error occurred:", error);
     },
   });
+}
+function handleSubItem(pageName) {
+  console.log(pageName, "pageName");
 
-  function handleSubItem(pageName) {
-    console.log(pageName, "pageName");
-
-    // $(".divRight").html(pageName);
-  }
+  // $(".divRight").html(pageName);
 }

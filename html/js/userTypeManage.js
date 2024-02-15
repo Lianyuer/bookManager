@@ -1,3 +1,4 @@
+// 根据 id 删除用户类型
 function del(id) {
   if (confirm("确定要删除吗？")) {
     $.ajax({
@@ -19,4 +20,49 @@ function del(id) {
       },
     });
   }
+}
+
+// 全局变量，用于控制是编辑还是新增
+var idd;
+// 新增用户类型
+function add() {
+  idd = -1;
+  $("#id").val("");
+  $("#typeName").val("");
+  $("#remark").val("");
+}
+
+// 编辑数据回显
+function edit(id) {
+  idd = id;
+  $.ajax({
+    url: "http://localhost:3000/usertype/selectById?id=" + idd,
+    success: (res) => {
+      console.log(res, "edit");
+      $("#typeName").val(res[0].typeName);
+      $("#remark").val(res[0].remark);
+    },
+  });
+}
+
+function submit() {
+  var obj = new Object();
+  obj.id = $("#id").val();
+  obj.typeName = $("#typeName").val();
+  obj.remark = $("#remark").val();
+  console.log(obj);
+  $.ajax({
+    url:
+      "http://localhost:3000/userType/userType_addAndEdit?id=" +
+      idd +
+      "&usertype=" +
+      JSON.stringify(obj),
+    success: (res) => {
+      if (res.status == 1) {
+        showAlert(1, res.msg);
+      } else {
+        showAlert(0, res.msg);
+      }
+    },
+  });
 }
