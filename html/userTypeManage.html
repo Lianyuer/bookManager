@@ -28,16 +28,38 @@
             </li>
           </ol>
         </nav>
-        <!-- 新增 -->
-        <button
-          type="button"
-          class="btn btn-success addBtn"
-          data-toggle="modal"
-          data-target="#myModal"
-          onclick="add()"
-        >
-          新增
-        </button>
+        <!-- 搜索 -->
+        <div class="topWrapper row mb-3">
+          <div class="input-group col-3">
+            <input
+              type="text"
+              id="searchIpt"
+              class="form-control"
+              placeholder="请输入用户类型"
+              aria-label="Recipient's username"
+              aria-describedby="basic-addon2"
+            />
+            <div class="input-group-append">
+              <button
+                class="input-group-text"
+                id="basic-addon2"
+                onclick="search($('#searchIpt').val())"
+              >
+                搜索
+              </button>
+            </div>
+          </div>
+          <!-- 新增 -->
+          <button
+            type="button"
+            class="btn btn-success addBtn"
+            data-toggle="modal"
+            data-target="#myModal"
+            onclick="add()"
+          >
+            新增
+          </button>
+        </div>
         <!-- 表格 -->
         <table class="table">
           <thead>
@@ -172,7 +194,7 @@
                 取消
               </button>
               <button
-                type="submit"
+                type="button"
                 class="btn btn-primary confirm"
                 data-dismiss="modal"
                 onclick="submit()"
@@ -192,9 +214,10 @@
       $.ajax({
         url: "http://localhost:3000/userType/userType_selectType",
         success: (res) => {
-          console.log(res);
+          // console.log(res);
+          let tr = ``;
           res.forEach((element) => {
-            let tr = `<tr>
+            tr += `<tr>
                         <td>${element.id}</td>
                         <td>${element.typeName}</td>
                         <td>${element.remark}</td>
@@ -204,8 +227,8 @@
                           <button type="button" class="btn btn-success">权限分配</button>
                         </td>
                       </tr>`;
-            $(".tShow").append(tr);
           });
+          $(".tShow").html(tr);
         },
       });
     }

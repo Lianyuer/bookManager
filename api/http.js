@@ -37,6 +37,15 @@ app.get("/userType/userType_selectType", function (req, res) {
   });
 });
 
+// 用户类型-根据用户类型名称搜索
+app.get("/userType/userType_selectByTypeName", function (req, res) {
+  db.userType_selectByTypeName(req.query.typename, function (data) {
+    if (data.length > 0) {
+      res.json(data);
+    }
+  });
+});
+
 // 用户类型-根据 id 删除用户类型
 app.get("/userType/deleteById", function (req, res) {
   db.userType_deleteById(req.query.id, function (data) {
@@ -54,7 +63,7 @@ app.get("/userType/userType_addAndEdit", function (req, res) {
     req.query.id,
     JSON.parse(req.query.usertype),
     function (data) {
-      console.log(data, "data");
+      // console.log(data, "data");
       if (data.affectedRows > 0) {
         res.json({ status: 0, msg: "操作成功", data: data });
       } else {

@@ -45,6 +45,13 @@ module.exports.userType_selectType = function (callback) {
   execSql(sql, callback);
 };
 
+// 用户类型-根据用户类型名称搜索
+module.exports.userType_selectByTypeName = function (name, callback) {
+  let sql = `select * from usertype where typeName like '%${name}%'`;
+  console.log(sql, "sql");
+  execSql(sql, callback);
+};
+
 // 用户类型-根据 id 删除用户类型
 module.exports.userType_deleteById = function (id, callback) {
   let sql = `delete from usertype where id = ${id}`;
@@ -63,7 +70,7 @@ module.exports.userType_addAndEdit = function (id, userType, callback) {
     var sql = `insert into usertype values (null,"${userType.typeName}","${userType.remark}")`;
   } else {
     // id 不等于 -1 说明是编辑
-    sql = `update usertype set id = null, typeName = "${userType.typeName}",remark = "${userType.remark}" where id = ${id}`;
+    sql = `update usertype set typeName = "${userType.typeName}",remark = "${userType.remark}" where id = ${id}`;
   }
   console.log(sql, "sql");
   execSql(sql, callback);

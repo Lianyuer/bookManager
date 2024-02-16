@@ -21,6 +21,12 @@
   }
 }
 
+/* 搜索 */
+.topWrapper {
+  margin: 0 15px;
+  align-items: center;
+}
+
 /* 新增按钮 */
 .addBtn {
   margin: 10px;
