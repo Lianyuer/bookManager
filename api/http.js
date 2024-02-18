@@ -41,7 +41,9 @@ app.get("/userType/userType_selectType", function (req, res) {
 app.get("/userType/userType_selectByTypeName", function (req, res) {
   db.userType_selectByTypeName(req.query.typename, function (data) {
     if (data.length > 0) {
-      res.json(data);
+      res.json({ status: 0, msg: "查询成功", data: data });
+    } else {
+      res.json({ status: 1, msg: "暂无数据" });
     }
   });
 });
