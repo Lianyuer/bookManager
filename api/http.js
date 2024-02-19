@@ -30,6 +30,13 @@ app.get("/pages/pages_selectAll", function (req, res) {
   });
 });
 
+// 查询所有页面数据（包含父级页面）
+app.get("/pages/pages_selectAllWithParent", function (req, res) {
+  db.pages_selectAllWithParent(function (data) {
+    res.json(data);
+  });
+});
+
 // ******************************userType-用户类型信息***********************************
 app.get("/userType/userType_selectType", function (req, res) {
   db.userType_selectType(function (data) {

@@ -1,0 +1,29 @@
+table {
+  tr {
+    th {
+      text-align: center;
+    }
+  }
+}
+
+.tShow {
+  tr {
+    td {
+      text-align: center;
+
+      button {
+        padding: 2px 8px;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.pager {
+  display: flex;
+
+  select {
+    width: 100px;
+    padding: 0 10px;
+  }
+}

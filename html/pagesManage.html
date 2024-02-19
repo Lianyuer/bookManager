@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- jQuery and JavaScript Bundle with Popper -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./font/iconfont.css" />
+    <link rel="stylesheet" href="./css/my_alert.css" />
+    <link rel="stylesheet" href="./css/pagesManage.css" />
+  </head>
+  <body>
+    <div class="divAll">
+      <!-- 面包屑导航 -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">系统设置</a></li>
+          <li class="breadcrumb-item active" aria-current="page">
+            页面信息管理
+          </li>
+        </ol>
+      </nav>
+      <div class="behavior mb-3 ml-3">
+        <button class="btn btn-info" onclick="search()">搜索</button>
+        <button class="btn btn-primary" onclick="add()">新增</button>
+      </div>
+      <table class="table">
+        <thead>
+          <th>序号</th>
+          <th>页面名称</th>
+          <th>页面路径</th>
+          <th>备注</th>
+          <th>父级页面</th>
+          <th>操作</th>
+        </thead>
+        <tbody class="tShow"></tbody>
+      </table>
+      <!-- 分页 -->
+      <div class="pager ml-3">
+        <select
+          name=""
+          id=""
+          class="form-control mr-2"
+          onclick="changePageSize(this)"
+        >
+          <option value="5">5条/页</option>
+          <option value="10">10条/页</option>
+          <option value="20">20条/页</option>
+        </select>
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <!-- <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li> -->
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- 警告框 -->
+    <div class="my_alert">
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="msgText">xxxx</div>
+      </div>
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="msgText">xxxx</div>
+      </div>
+      <div class="alert alert-warning alert-dismissible" role="alert">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="msgText">xxxx</div>
+      </div>
+      <div class="alert alert-info alert-dismissible" role="alert">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="msgText">xxxx</div>
+      </div>
+    </div>
+    <!-- 模态框 -->
+    <div
+      class="modal fade"
+      id="myModal"
+      tabindex="-1"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="myModalLabel">温馨提示</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">确认要退出吗？</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              关闭
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="exit()"
+              data-dismiss="modal"
+            >
+              确认退出
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="./js/my_alert.js"></script>
+  <script src="./js/pagination.js"></script>
+  <script src="./js/pagesManage.js"></script>
+  <script>
+    window.onload = function () {
+      search();
+    };
+  </script>
+</html>

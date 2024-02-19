@@ -39,6 +39,12 @@ module.exports.pages_selectAll = function (callback) {
   execSql(sql, callback);
 };
 
+// 查询所有页面数据（包含父级页面）
+module.exports.pages_selectAllWithParent = function (callback) {
+  let sql = `select a.*,b.pageName 'parentName' from pages a left join pages b on a.pid=b.id`;
+  execSql(sql, callback);
+};
+
 // ******************************userType-用户类型信息******************************
 module.exports.userType_selectType = function (callback) {
   let sql = `select * from usertype`;
