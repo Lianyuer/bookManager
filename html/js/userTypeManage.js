@@ -1,3 +1,33 @@
+// 全局变量，用于控制是编辑还是新增
+var idd;
+let data; //全部数据
+
+// 绑定数据
+function bindData() {
+  $.ajax({
+    url: "http://localhost:3000/userType/userType_selectType",
+    success: (res) => {
+      // console.log(res);
+      data = res;
+      let tr = ``;
+      res.forEach((element) => {
+        tr += `<tr>
+                        <td>${element.id}</td>
+                        <td>${element.typeName}</td>
+                        <td>${element.remark}</td>
+                        <td class="behavior">
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="edit(${element.id})">编辑</button>
+                          <button type="button" class="btn btn-danger" onclick="del(${element.id})">删除</button>
+                          <button type="button" class="btn btn-success">权限分配</button>
+                        </td>
+                      </tr>`;
+      });
+      $(".tShow").html(tr);
+    },
+  });
+}
+
+// 查询
 function search(name) {
   $.ajax({
     url:
@@ -56,8 +86,6 @@ function del(id) {
   }
 }
 
-// 全局变量，用于控制是编辑还是新增
-var idd;
 // 新增用户类型
 function add() {
   idd = -1;
@@ -81,6 +109,17 @@ function edit(id) {
 
 // 提交数据
 function submit() {
+  // 判空
+  if (!$("#typeName").val()) {
+    showAlert(2, "用户类型不能为空");
+    return;
+  }
+  // 判断重复
+  let flag = data.some((item) => item.typeName == $("#typeName").val());
+  if (flag) {
+    showAlert(2, "用户类型已存在");
+    return;
+  }
   var obj = new Object();
   obj.id = $("#id").val();
   obj.typeName = $("#typeName").val();

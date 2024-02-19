@@ -214,28 +214,6 @@
   <script src="./js/my_alert.js"></script>
   <script src="./js/userTypeManage.js"></script>
   <script>
-    function bindData() {
-      $.ajax({
-        url: "http://localhost:3000/userType/userType_selectType",
-        success: (res) => {
-          // console.log(res);
-          let tr = ``;
-          res.forEach((element) => {
-            tr += `<tr>
-                        <td>${element.id}</td>
-                        <td>${element.typeName}</td>
-                        <td>${element.remark}</td>
-                        <td class="behavior">
-                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="edit(${element.id})">编辑</button>
-                          <button type="button" class="btn btn-danger" onclick="del(${element.id})">删除</button>
-                          <button type="button" class="btn btn-success">权限分配</button>
-                        </td>
-                      </tr>`;
-          });
-          $(".tShow").html(tr);
-        },
-      });
-    }
     window.onload = function () {
       bindData();
     };

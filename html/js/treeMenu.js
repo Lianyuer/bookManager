@@ -46,7 +46,7 @@ function showMenu() {
                 .map(
                   (subItem) =>
                     // 将子菜单项转换为 a 标签，设置a标签的 target 值为 main.html中的 iframe标签的name值，并设置 href 属性
-                    `<li class="list-group-item subItem" onclick="handleSubItem('${subItem.pageName}')"><a target="iframe1" href='${subItem.pageUrl}'>${subItem.pageName}</a></li>`
+                    `<li class="list-group-item subItem"><a target="iframe1" href='${subItem.pageUrl}'>${subItem.pageName}</a></li>`
                 )
                 .join("") +
               `</ul>` +
@@ -83,8 +83,9 @@ function showMenu() {
     },
   });
 }
-function handleSubItem(pageName) {
-  console.log(pageName, "pageName");
 
-  // $(".divRight").html(pageName);
-}
+// function handleSubItem(pageName) {
+//   console.log(pageName, "pageName");
+
+//   // $(".divRight").html(pageName);
+// }
