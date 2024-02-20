@@ -37,6 +37,38 @@ app.get("/pages/pages_selectAllWithParent", function (req, res) {
   });
 });
 
+// 根据id删除页面
+app.get("/pages/pages_delById", function (req, res) {
+  db.pages_delById(req.query.id, function (data) {
+    if (data.affectedRows > 0) {
+      res.json({ status: 0, msg: "删除成功" });
+    } else {
+      res.json({ status: 1, msg: "删除失败" });
+    }
+  });
+});
+
+// 根据id查询某个页面的信息
+app.get("/pages/pages_selectById", function (req, res) {
+  db.pages_selectById(req.query.id, function (data) {
+    res.json(data);
+  });
+});
+// 新增和编辑页面信息
+app.get("/pages/pages_addAndEdit", function (req, res) {
+  db.pages_addAndEdit(
+    req.query.id,
+    JSON.parse(req.query.pages),
+    function (data) {
+      if (data.affectedRows > 0) {
+        res.json({ status: 0, msg: "操作成功" });
+      } else {
+        res.json({ status: 1, msg: "操作失败" });
+      }
+    }
+  );
+});
+
 // ******************************userType-用户类型信息***********************************
 app.get("/userType/userType_selectType", function (req, res) {
   db.userType_selectType(function (data) {

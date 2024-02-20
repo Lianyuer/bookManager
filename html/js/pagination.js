@@ -16,13 +16,13 @@ function showLi() {
       ? allData.length / pageSize
       : Math.floor(allData.length / pageSize) + 1;
   $(".pagination").empty();
-  var content = `<li class="page-item leftPage"><a href="javascript:leftPage()" class="page-link">&laquo;</a></li>`;
+  var content = `<li class="page-item prevPage"><a href="javascript:prevPage()" class="page-link">&laquo;</a></li>`;
   for (let i = 1; i <= pageCount; i++) {
     content += `<li class="page-item ${
       currentPage === i ? "active" : ""
     }"><a href="javascript:choosePage(${i})" class="page-link" >${i}</a></li>`;
   }
-  content += `<li class="page-item rightPage"><a href="javascript:rightPage()" class="page-link">&raquo;</a></li>`;
+  content += `<li class="page-item nextPage"><a href="javascript:nextPage()" class="page-link">&raquo;</a></li>`;
   $(".pagination").html(content);
 }
 
@@ -56,46 +56,47 @@ function choosePage(i) {
 
 function showData(data) {
   $(".tShow").html("");
-  var content = ``;
-  for (let i = 0; i < data.length; i++) {
-    content += `<tr>
-        <td>${data[i].id}</td>
-        <td>${data[i].pageName}</td>
-        <td>${data[i].pageUrl}</td>
-        <td>${data[i].remark}</td>
-        <td>${data[i].parentName}</td>
-        <td>
-          <button class="btn btn-info mr-2" onclick="">编辑</button>
-          <button class="btn btn-danger mr-2" onclick="">删除</button>
-        </td>
+  let tr = "";
+  data.forEach((element) => {
+    tr += `<tr>
+      <td>${element.id}</td>
+      <td>${element.pageName}</td>
+      <td>${element.pageUrl}</td>
+      <td>${element.remark}</td>
+      <td>${element.parentName}</td>
+      <td>
+        <button class="btn btn-info mr-2" data-toggle="modal"
+          data-target="#myModal" onclick="edit(${element.id})">编辑</button>
+        <button class="btn btn-danger mr-2" onclick="del(${element.id})">删除</button>
+      </td>
     </tr>`;
-  }
-  $(".tShow").html(content);
+  });
+  $(".tShow").html(tr);
 }
 
-function leftPage() {
+function prevPage() {
   if (currentPage > 1) {
     currentPage--;
     choosePage(currentPage);
-    // document.querySelector(".rightPage").classList.remove("disabled");
-    $(".rightPage").removeClass("disabled");
+    // document.querySelector(".nextPage").classList.remove("disabled");
+    $(".nextPage").removeClass("disabled");
   }
   if (currentPage == 1) {
-    // document.querySelector(".leftPage").classList.add("disabled");
-    $(".leftPage").addClass("disabled");
+    // document.querySelector(".prevPage").classList.add("disabled");
+    $(".prevPage").addClass("disabled");
   }
 }
 
-function rightPage() {
+function nextPage() {
   console.log(pageCount, "pageCount");
   if (currentPage < pageCount) {
     currentPage++;
     choosePage(currentPage);
-    // document.querySelector(".leftPage").classList.remove("disabled");
-    $(".leftPage").removeClass("disabled");
+    // document.querySelector(".prevPage").classList.remove("disabled");
+    $(".prevPage").removeClass("disabled");
   }
   if (currentPage == pageCount) {
     // document.querySelector(".rightPage").classList.add("disabled");
-    $(".rightPage").addClass("disabled");
+    $(".nextPage").addClass("disabled");
   }
 }

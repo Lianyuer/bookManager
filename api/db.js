@@ -45,6 +45,32 @@ module.exports.pages_selectAllWithParent = function (callback) {
   execSql(sql, callback);
 };
 
+// 根据id删除页面
+module.exports.pages_delById = function (id, callback) {
+  let sql = `delete from pages where id=` + id;
+  execSql(sql, callback);
+};
+
+// 根据id查询某个页面的信息
+module.exports.pages_selectById = function (id, callback) {
+  let sql =
+    `select a.*,b.pageName 'parentName' from pages a left join pages b on a.pid=b.id where a.id=` +
+    id;
+  execSql(sql, callback);
+};
+
+// 新增和编辑页面信息
+module.exports.pages_addAndEdit = function (id, pages, callback) {
+  // 新增
+  if (id == -1) {
+    var sql = `insert into pages(pageName,pageUrl,remark,pid) values('${pages.pageName}','${pages.pageUrl}','${pages.remark}',${pages.pid})`;
+  } else {
+    // 编辑
+    sql = `update pages set pageName='${pages.pageName}',pageUrl='${pages.pageUrl}',remark='${pages.remark}',pid=${pages.pid} where id=${id}`;
+  }
+  execSql(sql, callback);
+};
+
 // ******************************userType-用户类型信息******************************
 module.exports.userType_selectType = function (callback) {
   let sql = `select * from usertype`;
