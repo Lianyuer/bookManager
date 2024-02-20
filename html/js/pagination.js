@@ -14,10 +14,10 @@ function showLi() {
   pageCount =
     allData.length % pageSize == 0
       ? allData.length / pageSize
-      : allData.length / pageSize + 1;
+      : Math.floor(allData.length / pageSize) + 1;
   $(".pagination").empty();
   var content = `<li class="page-item leftPage"><a href="javascript:leftPage()" class="page-link">&laquo;</a></li>`;
-  for (let i = 1; i < pageCount; i++) {
+  for (let i = 1; i <= pageCount; i++) {
     content += `<li class="page-item ${
       currentPage === i ? "active" : ""
     }"><a href="javascript:choosePage(${i})" class="page-link" >${i}</a></li>`;
@@ -30,6 +30,8 @@ function showLi() {
 function choosePage(i) {
   // 移除当前激活的页码样式
   $(`.page-item.active`).removeClass("active");
+  // 移除当前禁用样式
+  $(`.page-item.disabled`).removeClass("disabled");
   currentPage = i;
   console.log(currentPage);
   // 为新的当前页码添加激活样式
@@ -75,21 +77,25 @@ function leftPage() {
   if (currentPage > 1) {
     currentPage--;
     choosePage(currentPage);
-    document.querySelector(".rightPage").classList.remove("disabled");
+    // document.querySelector(".rightPage").classList.remove("disabled");
+    $(".rightPage").removeClass("disabled");
   }
   if (currentPage == 1) {
-    document.querySelector(".leftPage").classList.add("disabled");
+    // document.querySelector(".leftPage").classList.add("disabled");
+    $(".leftPage").addClass("disabled");
   }
 }
 
 function rightPage() {
-  // console.log(pageCount, "pageCount");
+  console.log(pageCount, "pageCount");
   if (currentPage < pageCount) {
     currentPage++;
     choosePage(currentPage);
-    document.querySelector(".leftPage").classList.remove("disabled");
+    // document.querySelector(".leftPage").classList.remove("disabled");
+    $(".leftPage").removeClass("disabled");
   }
-  if (currentPage > pageCount) {
-    document.querySelector(".rightPage").classList.add("disabled");
+  if (currentPage == pageCount) {
+    // document.querySelector(".rightPage").classList.add("disabled");
+    $(".rightPage").addClass("disabled");
   }
 }
