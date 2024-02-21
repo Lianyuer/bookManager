@@ -45,6 +45,7 @@ function search(name) {
       "http://localhost:3000/userType/userType_selectByTypeName?typename=" +
       name,
     success: (res) => {
+      $("#searchIpt").val(""); // 搜索后清空输入框
       if (res.status == 0) {
         searchData = res.data;
         $(".emptyBox").html("");

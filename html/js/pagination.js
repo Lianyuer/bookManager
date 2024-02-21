@@ -16,11 +16,13 @@ function showLi() {
       ? allData.length / pageSize
       : Math.floor(allData.length / pageSize) + 1;
   // 如果搜到了数据，就根据搜到的数据进行页号显示
-  if (searchData.length > 0) {
-    pageCount =
-      searchData.length % pageSize == 0
-        ? searchData.length / pageSize
-        : Math.floor(searchData.length / pageSize) + 1;
+  if (typeof searchData != "undefined") {
+    if (searchData.length > 0) {
+      pageCount =
+        searchData.length % pageSize == 0
+          ? searchData.length / pageSize
+          : Math.floor(searchData.length / pageSize) + 1;
+    }
   }
   $(".pagination").empty();
   var content = `<li class="page-item prevPage"><a href="javascript:prevPage()" class="page-link">&laquo;</a></li>`;
@@ -50,16 +52,20 @@ function choosePage(i) {
       ? currentPage * pageSize - 1
       : allData.length - 1;
   // 如果有搜索到数据，就根据搜到的数据计算要显示的数据下标
-  if (searchData.length > 0) {
-    endIndex =
-      currentPage * pageSize < searchData.length
-        ? currentPage * pageSize - 1
-        : searchData.length - 1;
+  if (typeof searchData != "undefined") {
+    if (searchData.length > 0) {
+      endIndex =
+        currentPage * pageSize < searchData.length
+          ? currentPage * pageSize - 1
+          : searchData.length - 1;
+    }
   }
   var newData = [];
   for (let i = startIndex; i <= endIndex; i++) {
-    if (searchData.length > 0) {
-      newData.push(searchData[i]);
+    if (typeof searchData != "undefined") {
+      if (searchData.length > 0) {
+        newData.push(searchData[i]);
+      }
     } else {
       newData.push(allData[i]);
     }
@@ -72,8 +78,10 @@ function choosePage(i) {
   currentPageDom.textContent = `当前第${currentPage}页`;
   totalCountDom.textContent = `共${allData.length}条`;
   // 如果搜索到数据，就更新总条数
-  if (searchData.length > 0) {
-    totalCountDom.textContent = `共${searchData.length}条`;
+  if (typeof searchData != "undefined") {
+    if (searchData.length > 0) {
+      totalCountDom.textContent = `共${searchData.length}条`;
+    }
   }
 }
 
