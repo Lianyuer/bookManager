@@ -58,8 +58,8 @@ function showMenu() {
             // 返回顶级菜单项的 HTML 内容，包括折叠触发器和子菜单项
             return triggerButton + subItemsHtml;
           } else {
-            // 如果顶级菜单项没有子菜单项，则只创建一个 a 标签
-            return `<li class="list-group-item"><a href="#">${topItem.pageName}</a></li>`;
+            // 如果顶级菜单项没有子菜单项，则只创建一个 li 标签
+            return `<li class="list-group">${topItem.pageName}</li>`;
           }
         })
         .join("");
