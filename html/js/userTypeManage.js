@@ -1,6 +1,6 @@
 // 全局变量，用于控制是编辑还是新增
 var idd;
-let data; //全部数据
+var allData; //全部数据
 
 // 绑定数据
 function bindData() {
@@ -8,23 +8,33 @@ function bindData() {
     url: "http://localhost:3000/userType/userType_selectType",
     success: (res) => {
       // console.log(res);
-      data = res;
-      let tr = ``;
-      res.forEach((element) => {
-        tr += `<tr>
-                        <td>${element.id}</td>
-                        <td>${element.typeName}</td>
-                        <td>${element.remark}</td>
-                        <td class="behavior">
-                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="edit(${element.id})">编辑</button>
-                          <button type="button" class="btn btn-danger" onclick="del(${element.id})">删除</button>
-                          <button type="button" class="btn btn-success">权限分配</button>
-                        </td>
-                      </tr>`;
-      });
-      $(".tShow").html(tr);
+      allData = res;
+      showData(allData);
+      // 初始化分页
+      showLi();
+      // 默认显示第一页
+      choosePage(1);
     },
   });
+}
+
+// 根据页面不同，展示的数据不同，所以需要单独提出来
+function showData(data) {
+  $(".tShow").html("");
+  var tr = ``;
+  data.forEach((element) => {
+    tr += `<tr>
+                <td>${element.id}</td>
+                <td>${element.typeName}</td>
+                <td>${element.remark}</td>
+                <td class="behavior">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="edit(${element.id})">编辑</button>
+                  <button type="button" class="btn btn-danger" onclick="del(${element.id})">删除</button>
+                  <button type="button" class="btn btn-success">权限分配</button>
+                </td>
+              </tr>`;
+  });
+  $(".tShow").html(tr);
 }
 
 // 查询
@@ -115,7 +125,7 @@ function submit() {
     return;
   }
   // 判断重复
-  let flag = data.some((item) => item.typeName == $("#typeName").val());
+  let flag = allData.some((item) => item.typeName == $("#typeName").val());
   if (flag) {
     showAlert(2, "用户类型已存在");
     return;

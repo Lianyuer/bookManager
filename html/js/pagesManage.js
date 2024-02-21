@@ -2,6 +2,26 @@ var allData;
 var parentData = [];
 var idd = -1; // 全局变量，判断是编辑还是新增
 
+// 根据页面不同，展示的数据不同，所以需要单独提出来
+function showData(data) {
+  $(".tShow").html("");
+  let tr = "";
+  data.forEach((element) => {
+    tr += `<tr>
+      <td>${element.id}</td>
+      <td>${element.pageName}</td>
+      <td>${element.pageUrl}</td>
+      <td>${element.remark}</td>
+      <td>${element.parentName}</td>
+      <td>
+        <button class="btn btn-info mr-2" data-toggle="modal"
+          data-target="#myModal" onclick="edit(${element.id})">编辑</button>
+        <button class="btn btn-danger mr-2" onclick="del(${element.id})">删除</button>
+      </td>
+    </tr>`;
+  });
+  $(".tShow").html(tr);
+}
 // 搜索所有页面信息（包含父级）
 function search() {
   $.ajax({

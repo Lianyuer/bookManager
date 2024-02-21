@@ -54,26 +54,6 @@ function choosePage(i) {
   totalCountDom.textContent = `共${allData.length}条`;
 }
 
-function showData(data) {
-  $(".tShow").html("");
-  let tr = "";
-  data.forEach((element) => {
-    tr += `<tr>
-      <td>${element.id}</td>
-      <td>${element.pageName}</td>
-      <td>${element.pageUrl}</td>
-      <td>${element.remark}</td>
-      <td>${element.parentName}</td>
-      <td>
-        <button class="btn btn-info mr-2" data-toggle="modal"
-          data-target="#myModal" onclick="edit(${element.id})">编辑</button>
-        <button class="btn btn-danger mr-2" onclick="del(${element.id})">删除</button>
-      </td>
-    </tr>`;
-  });
-  $(".tShow").html(tr);
-}
-
 function prevPage() {
   if (currentPage > 1) {
     currentPage--;

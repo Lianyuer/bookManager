@@ -18,19 +18,3 @@ table {
     }
   }
 }
-
-.pager {
-  display: flex;
-  align-items: center;
-
-  select {
-    width: 100px;
-    padding: 0 10px;
-  }
-
-  .pagination,
-  label {
-    margin: 0;
-  }
-
-}
