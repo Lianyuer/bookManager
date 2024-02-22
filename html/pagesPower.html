@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>权限分配</title>
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- jQuery and JavaScript Bundle with Popper -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./font/iconfont.css" />
+    <link rel="stylesheet" href="./css/my_alert.css" />
+    <link rel="stylesheet" href="./css/pagesPower.css" />
+  </head>
+  <body>
+    <!-- 面包屑导航 -->
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">用户管理</a></li>
+        <li class="breadcrumb-item">
+          <a href="#">页面类型管理</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">权限分配</li>
+      </ol>
+    </nav>
+    <div class="divAll">
+      <input type="checkbox" name="" id="" onclick="chooseAll(this)" /> 全选
+      <button class="btn btn-info ml-3" onclick="submit()">确定</button>
+      <!-- 权限展示 -->
+      <div class="divShow"></div>
+      <!-- 警告框 -->
+      <div class="my_alert">
+        <div class="alert alert-success alert-dismissible" role="alert">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="msgText">xxxx</div>
+        </div>
+        <div class="alert alert-danger alert-dismissible" role="alert">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="msgText">xxxx</div>
+        </div>
+        <div class="alert alert-warning alert-dismissible" role="alert">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="msgText">xxxx</div>
+        </div>
+        <div class="alert alert-info alert-dismissible" role="alert">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="msgText">xxxx</div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="./js/my_alert.js"></script>
+  <script>
+    var tid = -1; // 类型id
+    window.onload = function () {
+      if (!location.search) {
+        showAlert(2, "必须从用户页面进行权限分配");
+        setTimeout(() => {
+          location.href = "./login.html";
+        }, 1000);
+      }
+      tid = location.search.split("=")[1];
+      $.ajax({
+        url: "http://localhost:3000/pages/pages_selectByTid?tid=" + tid,
+        success: (res) => {
+          console.log(res, "pages_selectByTid");
+          let ones = res.filter((item) => {
+            return item.pid == 0;
+          });
+          let content = `<ul class="mt-3">`;
+          ones.forEach((topItem) => {
+            if (topItem.isCheck == "true") {
+              content += `<li><input type="checkbox" class="cbChoose" checked value="${topItem.id}"/>${topItem.pageName}`;
+            } else {
+              content += `<li><input type="checkbox" class="cbChoose"  value="${topItem.id}"/>${topItem.pageName}`;
+            }
+            let twos = res.filter((subItem) => {
+              return subItem.pid == topItem.id;
+            });
+            content += `<ol>`;
+            twos.forEach((subItem) => {
+              if (subItem.isCheck == "true") {
+                content += `<li><input type="checkbox" class="cbChoose" checked value="${subItem.id}"/>${subItem.pageName}</li>`;
+              } else {
+                content += `<li><input type="checkbox" class="cbChoose" value="${subItem.id}"/>${subItem.pageName}</li>`;
+              }
+            });
+            content += `</ol></li>`;
+          });
+          content += `</ul>`;
+          $(".divShow").html(content);
+        },
+      });
+    };
+    // 全选全不选
+    function chooseAll(e) {
+      $(".cbChoose").prop("checked", e.checked);
+    }
+    // 确认权限
+    function submit() {
+      // 获取选中的id
+      let selectedPid = [];
+      $(".cbChoose").each((index, item) => {
+        if (item.checked) {
+          selectedPid.push(item.value);
+        }
+      });
+      $.ajax({
+        url: "http://localhost:3000/usertype_pages/add",
+        data: {
+          tid: tid,
+          pids: selectedPid,
+        },
+        success: (res) => {
+          showAlert(res.status, res.msg);
+        },
+      });
+    }
+  </script>
+</html>

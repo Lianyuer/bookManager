@@ -69,6 +69,13 @@ app.get("/pages/pages_addAndEdit", function (req, res) {
   );
 });
 
+// 根据类型id查询页面信息
+app.get("/pages/pages_selectByTid", function (req, res) {
+  db.pages_selectByTid(req.query.tid, function (data) {
+    res.json(data);
+  });
+});
+
 // ******************************userType-用户类型信息***********************************
 app.get("/userType/userType_selectType", function (req, res) {
   db.userType_selectType(function (data) {
@@ -115,13 +122,38 @@ app.get("/userType/userType_addAndEdit", function (req, res) {
 });
 
 // 用户类型-根据id查询用户类型数据
-app.get("/usertype/selectById", function (req, res) {
+app.get("/usertype/usertype_selectById", function (req, res) {
   db.usertype_selectById(req.query.id, function (data) {
     if (data.length > 0) {
       res.json(data);
     }
   });
 });
+
+// ***************************usertype_pages-用户类型和页面之间的关系*******************************
+app.get("/usertype_pages/add", function (req, res) {
+  let tid = req.query.tid;
+  let pids = req.query.pids;
+  let count = 0; // 累加器
+  // 删除
+  db.usertype_pages_deleteByTid(tid, function (data) {
+    for (let i = 0; i < pids.length; i++) {
+      // 新增
+      db.usertype_pages_add(tid, pids[i], function (data1) {
+        if (data1.affectedRows > 0) {
+          count++;
+        }
+        if (count == pids.length) {
+          res.json({ status: 0, msg: "操作成功" });
+        }
+        // else {
+        //   res.json({ status: 1, msg: "操作失败" });
+        // }
+      });
+    }
+  });
+});
+
 // 端口
 app.listen(3000, function () {
   console.log("服务器已启动，监听端口3000");

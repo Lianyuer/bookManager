@@ -71,6 +71,12 @@ module.exports.pages_addAndEdit = function (id, pages, callback) {
   execSql(sql, callback);
 };
 
+// 根据类型id查询页面信息
+module.exports.pages_selectByTid = function (tid, callback) {
+  let sql = `select a.*,case when b.pid is not null then 'true' else 'false' end as 'isCheck' from pages a left join (select * from usertype_pages where utid=${tid}) b on a.id=b.pid order by a.id`;
+  execSql(sql, callback);
+};
+
 // ******************************userType-用户类型信息******************************
 module.exports.userType_selectType = function (callback) {
   let sql = `select * from usertype`;
@@ -107,3 +113,27 @@ module.exports.userType_addAndEdit = function (id, userType, callback) {
   console.log(sql, "sql");
   execSql(sql, callback);
 };
+
+// ***************************usertype_pages-用户类型和页面之间的关系*******************************
+// 删除
+module.exports.usertype_pages_deleteByTid = function (tid, callback) {
+  let sql = `delete from usertype_pages where utid=` + tid;
+  execSql(sql, callback);
+};
+// module.exports.usertype_pages_deleteByTid = async function (tid) {
+//   const sql = `DELETE FROM usertype_pages WHERE utid = ?`; // 防止SQL注入
+//   const [rowsDeleted] = await connection.query(sql, [tid]); // 防止SQL注入
+//   return rowsDeleted;
+// };
+
+// 新增
+module.exports.usertype_pages_add = function (tid, pid, callback) {
+  let sql = `insert into usertype_pages values(${tid},${pid})`;
+  execSql(sql, callback);
+};
+
+// module.exports.usertype_pages_add = async function (tid, pid) {
+//   const sql = `INSERT INTO usertype_pages (tid, pid) VALUES (?, ?)`;
+//   const [rowsInserted] = await connection.query(sql, [tid, pid]);
+//   return rowsInserted;
+// };

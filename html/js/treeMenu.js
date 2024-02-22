@@ -1,9 +1,11 @@
 function showMenu() {
   // 发起 AJAX 请求，从服务器获取所有菜单项数据
   $.ajax({
-    url: "http://localhost:3000/pages/pages_selectAll",
+    url:
+      "http://localhost:3000/pages/pages_selectByTid?tid=" +
+      JSON.parse(localStorage.getItem("userInfo")).typeId,
     success: (res) => {
-      console.log(res, "res");
+      // console.log(res, "res");
       // 创建一个映射对象，用于存储菜单项及其子菜单项，map是计算结束后返回的值，是下一次调用回调时的第一个参数；item是当前值
       const itemMap = res.reduce((map, item) => {
         // 将每个菜单项添加到映射中，并初始化其子菜单项数组
@@ -22,7 +24,7 @@ function showMenu() {
 
         return map;
       }, {});
-      console.log(itemMap, "itemMap");
+      // console.log(itemMap, "itemMap");
 
       // 从映射中提取所有顶级菜单项，返回一个新数组
       const topLevelItems = Object.values(itemMap).filter(
@@ -43,17 +45,21 @@ function showMenu() {
               `<div class="collapse collapseBox" id="${collapseId}">` +
               `<ul class="list-group list-group-flush subItemGroup">` +
               topItem.subItems
-                .map(
-                  (subItem) =>
-                    // 将子菜单项转换为 a 标签，设置a标签的 target 值为 main.html中的 iframe标签的name值，并设置 href 属性
-                    `<li class="list-group-item subItem"><a target="iframe1" href='${subItem.pageUrl}'>${subItem.pageName}</a></li>`
-                )
+                .map((subItem) => {
+                  // 将子菜单项转换为 a 标签，设置a标签的 target 值为 main.html中的 iframe标签的name值，并设置 href 属性
+                  return subItem.isCheck == "true"
+                    ? `<li class="list-group-item subItem"><a target="iframe1" href='${subItem.pageUrl}'>${subItem.pageName}</a></li>`
+                    : "";
+                })
                 .join("") +
               `</ul>` +
               `</div>`;
 
             // 创建折叠触发器的按钮，并设置 data-target 属性以指向相应的 collapse 元素
-            const triggerButton = `<div class="list-group topItem"  data-toggle="collapse" data-target="#${collapseId}" aria-expanded="false" aria-controls="${collapseId}">${topItem.pageName}</div>`;
+            const triggerButton =
+              topItem.isCheck == "true"
+                ? `<div class="list-group topItem"  data-toggle="collapse" data-target="#${collapseId}" aria-expanded="false" aria-controls="${collapseId}">${topItem.pageName}</div>`
+                : "";
 
             // 返回顶级菜单项的 HTML 内容，包括折叠触发器和子菜单项
             return triggerButton + subItemsHtml;
@@ -69,10 +75,10 @@ function showMenu() {
         .empty()
         .append(`<ul class="list-group">${listGroupContent}</ul>`);
 
-      console.log(
-        document.querySelector(".collapseBox").style.display,
-        "display"
-      );
+      // console.log(
+      //   document.querySelector(".collapseBox").style.display,
+      //   "display"
+      // );
 
       // 初始化所有 collapse 元素以启用折叠功能
       $(".collapse").collapse();
@@ -83,9 +89,3 @@ function showMenu() {
     },
   });
 }
-
-// function handleSubItem(pageName) {
-//   console.log(pageName, "pageName");
-
-//   // $(".divRight").html(pageName);
-// }

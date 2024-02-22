@@ -23,6 +23,7 @@ function showData(data) {
   $(".tShow").html("");
   let tr = ``;
   data.forEach((element) => {
+    console.log(element, "element");
     tr += `<tr>
                 <td>${element.id}</td>
                 <td>${element.typeName}</td>
@@ -30,7 +31,7 @@ function showData(data) {
                 <td class="behavior">
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="edit(${element.id})">编辑</button>
                   <button type="button" class="btn btn-danger" onclick="del(${element.id})">删除</button>
-                  <button type="button" class="btn btn-success">权限分配</button>
+                  <a type="button" href="./pagesPower.html?tid=${element.id}" class="btn btn-success">权限分配</a>
                 </td>
               </tr>`;
   });

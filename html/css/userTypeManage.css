@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: center; */
 
-  button {
+  .btn {
     padding: 3px;
     font-size: 14px;
   }
