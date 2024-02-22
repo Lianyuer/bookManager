@@ -45,12 +45,13 @@ function choosePage(i) {
   // console.log(currentPage, "currentPage");
   // 为新的当前页码添加激活样式
   $(`.page-item:has(a[href="javascript:choosePage(${i})"])`).addClass("active");
-  var startIndex = (currentPage - 1) * pageSize;
+  let startIndex = (currentPage - 1) * pageSize;
 
-  var endIndex =
+  let endIndex =
     currentPage * pageSize < allData.length
       ? currentPage * pageSize - 1
       : allData.length - 1;
+  console.log(startIndex, endIndex);
   // 如果有搜索到数据，就根据搜到的数据计算要显示的数据下标
   if (typeof searchData != "undefined") {
     if (searchData.length > 0) {
@@ -62,15 +63,20 @@ function choosePage(i) {
   }
   var newData = [];
   for (let i = startIndex; i <= endIndex; i++) {
+    // 如果searchData被定义了，并且有数据，则push searchData的数据
     if (typeof searchData != "undefined") {
       if (searchData.length > 0) {
         newData.push(searchData[i]);
+      } else {
+        // searchData被定义了，但是没有数据，就push allData的数据
+        newData.push(allData[i]);
       }
     } else {
       newData.push(allData[i]);
     }
     showData(newData);
   }
+  console.log(newData, "newData");
   // 获取要更新的标签元素
   const currentPageDom = document.getElementById("currentPageDom");
   const totalCountDom = document.getElementById("totalCountDom");

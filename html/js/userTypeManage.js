@@ -8,12 +8,11 @@ function bindData() {
   $.ajax({
     url: "http://localhost:3000/userType/userType_selectType",
     success: (res) => {
-      // console.log(res);
       allData = res;
       showData(allData);
-      // 初始化分页
+      // // 初始化分页
       showLi();
-      // 默认显示第一页
+      // // 默认显示第一页
       choosePage(1);
     },
   });
@@ -22,7 +21,7 @@ function bindData() {
 // 根据页面不同，展示的数据不同，所以需要单独提出来
 function showData(data) {
   $(".tShow").html("");
-  var tr = ``;
+  let tr = ``;
   data.forEach((element) => {
     tr += `<tr>
                 <td>${element.id}</td>
