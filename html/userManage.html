@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用户信息管理页面</title>
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- jQuery and JavaScript Bundle with Popper -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./font/iconfont.css" />
+    <link rel="stylesheet" href="./css/my_alert.css" />
+    <link rel="stylesheet" href="./css/userManage.css" />
+  </head>
+  <body>
+    <!-- 面包屑导航 -->
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">用户管理</a></li>
+        <li class="breadcrumb-item">用户信息管理</li>
+      </ol>
+    </nav>
+    <div class="divAll">
+      <div class="behavior">
+        <button
+          class="btn btn-info ml-3 mb-3"
+          data-toggle="modal"
+          data-target="#myModal"
+          onclick="add()"
+        >
+          新增
+        </button>
+      </div>
+      <table class="table">
+        <thead>
+          <th>序号</th>
+          <th>身份编码</th>
+          <th>密码</th>
+          <th>姓名</th>
+          <th>手机号</th>
+          <th>住址</th>
+          <th>微信号</th>
+          <th>用户类型id</th>
+          <th>操作</th>
+        </thead>
+        <tbody class="tShow"></tbody>
+      </table>
+    </div>
+    <!-- 警告框 -->
+    <div class="my_alert">
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="msgText">xxxx</div>
+      </div>
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="msgText">xxxx</div>
+      </div>
+      <div class="alert alert-warning alert-dismissible" role="alert">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="msgText">xxxx</div>
+      </div>
+      <div class="alert alert-info alert-dismissible" role="alert">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="msgText">xxxx</div>
+      </div>
+    </div>
+    <!-- 模态框 -->
+    <div
+      class="modal fade"
+      id="myModal"
+      tabindex="-1"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="myModalLabel">操作用户信息</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- 表单内容 -->
+            <table class="table modalForm">
+              <tr>
+                <td class="txt">id</td>
+                <td>
+                  <input
+                    type="text"
+                    id="id"
+                    class="form-control disabled"
+                    aria-label="id"
+                    aria-describedby="basic-addon1"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td class="txt">身份编码</td>
+                <td>
+                  <input
+                    type="text"
+                    id="idCard"
+                    class="form-control"
+                    aria-label="id"
+                    aria-describedby="basic-addon1"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td class="txt">密码</td>
+                <td>
+                  <input
+                    type="text"
+                    id="pwd"
+                    class="form-control"
+                    aria-label="id"
+                    aria-describedby="basic-addon1"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td class="txt">姓名</td>
+                <td>
+                  <input
+                    type="text"
+                    id="name"
+                    class="form-control"
+                    aria-label="id"
+                    aria-describedby="basic-addon1"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td class="txt">手机号</td>
+                <td>
+                  <input
+                    type="text"
+                    id="phone"
+                    class="form-control"
+                    aria-label="id"
+                    aria-describedby="basic-addon1"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td class="txt">住址</td>
+                <td>
+                  <input
+                    type="text"
+                    id="addr"
+                    class="form-control"
+                    aria-label="id"
+                    aria-describedby="basic-addon1"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td class="txt">微信号</td>
+                <td>
+                  <input
+                    type="text"
+                    id="wxNo"
+                    class="form-control"
+                    aria-label="id"
+                    aria-describedby="basic-addon1"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td class="txt">用户类型id</td>
+                <td>
+                  <input
+                    type="text"
+                    id="tid"
+                    class="form-control"
+                    aria-label="id"
+                    aria-describedby="basic-addon1"
+                  />
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary cancel"
+              data-dismiss="modal"
+            >
+              取消
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary confirm"
+              data-dismiss="modal"
+              onclick="submit()"
+            >
+              确定
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="./js/my_alert.js"></script>
+  <script src="./js/userManage.js"></script>
+  <script>
+    window.onload = function () {
+      showData();
+    };
+  </script>
+</html>

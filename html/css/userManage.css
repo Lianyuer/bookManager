@@ -1,0 +1,19 @@
+.divAll .table th {
+  text-align: center;
+}
+
+.divAll .tShow td {
+  text-align: center;
+}
+
+.divAll .tShow td button {
+  padding: 3px;
+  font-size: 14px;
+}
+
+/* 模态框表单 */
+.modalForm .txt {
+  padding: 0;
+  line-height: 63px;
+  padding-left: 30px;
+}

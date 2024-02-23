@@ -154,6 +154,47 @@ app.get("/usertype_pages/add", function (req, res) {
   });
 });
 
+// ***************************user-用户信息表*******************************
+// 查询所有用户信息数据
+app.get("/user/user_selectAll", function (req, res) {
+  db.user_selectAll(function (data) {
+    res.json(data);
+  });
+});
+
+// 根据id删除用户信息
+app.get("/user/user_deleteById", function (req, res) {
+  db.user_deleteById(req.query.id, function (data) {
+    if (data.affectedRows > 0) {
+      res.json({ status: 0, msg: "删除成功" });
+    } else {
+      res.json({ status: 1, msg: "删除失败" });
+    }
+  });
+});
+
+// 根据id查询用户信息数据
+app.get("/user/user_selectById", function (req, res) {
+  db.user_selectById(req.query.id, function (data) {
+    res.json(data);
+  });
+});
+
+// 新增和编辑用户信息数据
+app.get("/user/user_addAndEdit", function (req, res) {
+  db.user_addAndEdit(
+    req.query.id,
+    JSON.parse(req.query.userInfo),
+    function (data) {
+      if (data.affectedRows > 0) {
+        res.json({ status: 0, msg: "操作成功" });
+      } else {
+        res.json({ status: 1, msg: "操作失败" });
+      }
+    }
+  );
+});
+
 // 端口
 app.listen(3000, function () {
   console.log("服务器已启动，监听端口3000");

@@ -137,3 +137,32 @@ module.exports.usertype_pages_add = function (tid, pid, callback) {
 //   const [rowsInserted] = await connection.query(sql, [tid, pid]);
 //   return rowsInserted;
 // };
+
+// ***************************user-用户信息表*******************************
+// 查询所有用户信息数据
+module.exports.user_selectAll = function (callback) {
+  let sql = `select * from user`;
+  execSql(sql, callback);
+};
+
+// 根据id查询用户信息数据
+module.exports.user_selectById = function (id, callback) {
+  let sql = `select * from user where id=` + id;
+  execSql(sql, callback);
+};
+
+// 新增和编辑用户信息数据
+module.exports.user_addAndEdit = function (id, userInfo, callback) {
+  if (id == -1) {
+    var sql = `insert into user(idCard,password,realNAme,phone,address,wxNo,typeId) values('${userInfo.idCard}','${userInfo.password}','${userInfo.realName}','${userInfo.phone}','${userInfo.address}','${userInfo.wxNo}',${userInfo.typeId})`;
+  } else {
+    sql = `update user set idCard='${userInfo.idCard}',password='${userInfo.password}',realNAme='${userInfo.realName}',phone='${userInfo.phone}',address='${userInfo.address}',wxNo='${userInfo.wxNo}',typeId=${userInfo.typeId} where id=${id}`;
+  }
+  execSql(sql, callback);
+};
+
+// 根据id删除用户信息
+module.exports.user_deleteById = function (id, callback) {
+  let sql = `delete from user where id=` + id;
+  execSql(sql, callback);
+};
