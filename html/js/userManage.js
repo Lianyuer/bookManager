@@ -83,25 +83,37 @@ function submit() {
   obj.address = $("#addr").val();
   obj.wxNo = $("#wxNo").val();
   obj.typeId = $("#tid").val();
-  if (allData.some((item) => item.idCard == obj.idCard)) {
+
+  /**
+   * 编辑当前项时，只需要对除了当前项以外的其他项及逆行排重校验即可，自身不需要对自身进行重复校验
+   * item.id !== currentItemId && 排除当前项
+   */
+  let currentItemId = parseInt($("#id").val()); // 记录当前点击回显项的id
+  let idCardFlag = allData.some(
+    (item) => item.id !== currentItemId && item.idCard == $("#idCard").val()
+  );
+  let phoneFlag = allData.some(
+    (item) => item.id !== currentItemId && item.phone == $("#phone").val()
+  );
+  if (idCardFlag) {
     showAlert(2, "身份编号不能重复");
     return;
-  } else if (allData.some((item) => item.phone == obj.phone)) {
+  }
+  if (phoneFlag) {
     showAlert(2, "手机号不能重复");
     return;
-  } else {
-    $.ajax({
-      url: "http://localhost:3000/user/user_addAndEdit",
-      data: {
-        id: idd,
-        userInfo: JSON.stringify(obj),
-      },
-      success: (res) => {
-        showAlert(res.status, res.msg);
-        setTimeout(() => {
-          location.reload();
-        }, 1000);
-      },
-    });
   }
+  $.ajax({
+    url: "http://localhost:3000/user/user_addAndEdit",
+    data: {
+      id: idd,
+      userInfo: JSON.stringify(obj),
+    },
+    success: (res) => {
+      showAlert(res.status, res.msg);
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
+    },
+  });
 }

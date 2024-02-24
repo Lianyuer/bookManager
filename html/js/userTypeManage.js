@@ -107,9 +107,10 @@ function add() {
 function edit(id) {
   idd = id;
   $.ajax({
-    url: "http://localhost:3000/usertype/selectById?id=" + idd,
+    url: "http://localhost:3000/usertype/usertype_selectById?id=" + idd,
     success: (res) => {
-      // console.log(res, "edit");
+      console.log(res, "edit");
+      $("#id").val(res[0].id);
       $("#typeName").val(res[0].typeName);
       $("#remark").val(res[0].remark);
     },
@@ -124,7 +125,13 @@ function submit() {
     return;
   }
   // 判断重复
-  let flag = allData.some((item) => item.typeName == $("#typeName").val());
+  /**
+   * some函数将不会考虑id与currentItemId相同的项，从而确保唯一性检查是针对除了当前编辑项之外的所有项的。
+   */
+  let currentItemId = parseInt($("#id").val()); // 当前项
+  let flag = allData.some(
+    (item) => item.id !== currentItemId && item.typeName == $("#typeName").val()
+  );
   if (flag) {
     showAlert(2, "用户类型已存在");
     return;
