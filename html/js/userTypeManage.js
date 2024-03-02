@@ -6,7 +6,7 @@ var searchData = new Array(); // 搜索到的数据
 // 绑定数据
 function bindData() {
   $.ajax({
-    url: "http://localhost:3000/userType/userType_selectType",
+    url: "http://localhost:8888/userType/userType_selectType",
     success: (res) => {
       allData = res;
       showData(allData);
@@ -23,7 +23,7 @@ function showData(data) {
   $(".tShow").html("");
   let tr = ``;
   data.forEach((element) => {
-    console.log(element, "element");
+    // console.log(element, "element");
     tr += `<tr>
                 <td>${element.id}</td>
                 <td>${element.typeName}</td>
@@ -42,7 +42,7 @@ function showData(data) {
 function search(name) {
   $.ajax({
     url:
-      "http://localhost:3000/userType/userType_selectByTypeName?typename=" +
+      "http://localhost:8888/userType/userType_selectByTypeName?typename=" +
       name,
     success: (res) => {
       $("#searchIpt").val(""); // 搜索后清空输入框
@@ -75,7 +75,7 @@ function search(name) {
 function del(id) {
   if (confirm("确定要删除吗？")) {
     $.ajax({
-      url: "http://localhost:3000/userType/deleteById?id=" + id,
+      url: "http://localhost:8888/userType/deleteById?id=" + id,
       success: (res) => {
         if (res.status == 1) {
           showAlert(0, res.msg);
@@ -107,9 +107,9 @@ function add() {
 function edit(id) {
   idd = id;
   $.ajax({
-    url: "http://localhost:3000/usertype/usertype_selectById?id=" + idd,
+    url: "http://localhost:8888/usertype/usertype_selectById?id=" + idd,
     success: (res) => {
-      console.log(res, "edit");
+      // console.log(res, "edit");
       $("#id").val(res[0].id);
       $("#typeName").val(res[0].typeName);
       $("#remark").val(res[0].remark);
@@ -143,7 +143,7 @@ function submit() {
   // console.log(obj);
   $.ajax({
     url:
-      "http://localhost:3000/userType/userType_addAndEdit?id=" +
+      "http://localhost:8888/userType/userType_addAndEdit?id=" +
       idd +
       "&usertype=" +
       JSON.stringify(obj),

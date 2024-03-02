@@ -2,7 +2,7 @@ let idd = -1; // 判断是新增还是编辑
 var allData = []; //所有数据
 function showData() {
   $.ajax({
-    url: "http://localhost:3000/user/user_selectAll",
+    url: "http://localhost:8888/user/user_selectAll",
     success: (res) => {
       allData = res;
       let content = ``;
@@ -31,7 +31,7 @@ function showData() {
 function del(id) {
   if (confirm("确定要删除吗？")) {
     $.ajax({
-      url: "http://localhost:3000/user/user_deleteById?id=" + id,
+      url: "http://localhost:8888/user/user_deleteById?id=" + id,
       success: (res) => {
         showAlert(res.status, res.msg);
         setTimeout(() => {
@@ -46,7 +46,7 @@ function del(id) {
 function editShow(id) {
   idd = id;
   $.ajax({
-    url: "http://localhost:3000/user/user_selectById?id=" + idd,
+    url: "http://localhost:8888/user/user_selectById?id=" + idd,
     success: (res) => {
       data = res[0];
       $("#id").val(data.id);
@@ -104,7 +104,7 @@ function submit() {
     return;
   }
   $.ajax({
-    url: "http://localhost:3000/user/user_addAndEdit",
+    url: "http://localhost:8888/user/user_addAndEdit",
     data: {
       id: idd,
       userInfo: JSON.stringify(obj),

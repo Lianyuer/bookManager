@@ -26,7 +26,7 @@ function showData(data) {
 // 搜索所有页面信息（包含父级）
 function search() {
   $.ajax({
-    url: "http://localhost:3000/pages/pages_selectAllWithParent",
+    url: "http://localhost:8888/pages/pages_selectAllWithParent",
     success: (res) => {
       allData = res;
       parentData = res.filter((item) => item.pid == 0);
@@ -57,7 +57,7 @@ function del(id) {
   idd = id;
   if (confirm("确定要删除吗？")) {
     $.ajax({
-      url: "http://localhost:3000/pages/pages_delById?id=" + idd,
+      url: "http://localhost:8888/pages/pages_delById?id=" + idd,
       success: (res) => {
         if (res.status == 0) {
           showAlert(0, res.msg);
@@ -84,7 +84,7 @@ function add() {
 function edit(id) {
   idd = id;
   $.ajax({
-    url: "http://localhost:3000/pages/pages_selectById?id=" + idd,
+    url: "http://localhost:8888/pages/pages_selectById?id=" + idd,
     success: (res) => {
       // console.log(res, "pages_selectById");
       $("#pageName").val(res[0].pageName);
@@ -138,7 +138,7 @@ function submit() {
   obj.pid = selectedValue;
   $.ajax({
     url:
-      "http://localhost:3000/pages/pages_addAndEdit?id=" +
+      "http://localhost:8888/pages/pages_addAndEdit?id=" +
       idd +
       "&pages=" +
       JSON.stringify(obj),

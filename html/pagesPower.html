@@ -92,7 +92,7 @@
       }
       tid = location.search.split("=")[1];
       $.ajax({
-        url: "http://localhost:3000/pages/pages_selectByTid?tid=" + tid,
+        url: "http://localhost:8888/pages/pages_selectByTid?tid=" + tid,
         success: (res) => {
           console.log(res, "pages_selectByTid");
           let ones = res.filter((item) => {
@@ -137,7 +137,7 @@
         }
       });
       $.ajax({
-        url: "http://localhost:3000/usertype_pages/add",
+        url: "http://localhost:8888/usertype_pages/add",
         data: {
           tid: tid,
           pids: selectedPid,

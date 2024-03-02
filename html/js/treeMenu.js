@@ -2,7 +2,7 @@ function showMenu() {
   // 发起 AJAX 请求，从服务器获取所有菜单项数据
   $.ajax({
     url:
-      "http://localhost:3000/pages/pages_selectByTid?tid=" +
+      "http://localhost:8888/pages/pages_selectByTid?tid=" +
       JSON.parse(localStorage.getItem("userInfo")).typeId,
     success: (res) => {
       // console.log(res, "res");

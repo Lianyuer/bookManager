@@ -196,6 +196,6 @@ app.get("/user/user_addAndEdit", function (req, res) {
 });
 
 // 端口
-app.listen(3000, function () {
-  console.log("服务器已启动，监听端口3000");
+app.listen(8888, function () {
+  console.log("服务器已启动，监听端口8888");
 });

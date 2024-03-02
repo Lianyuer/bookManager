@@ -17,7 +17,7 @@ function login() {
   ) {
     $.ajax({
       url:
-        "http://localhost:3000/login?phone=" +
+        "http://localhost:8888/login?phone=" +
         $("#tName").val() +
         "&password=" +
         $("#tPwd").val(),
